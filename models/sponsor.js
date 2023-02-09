@@ -31,10 +31,6 @@ const SponsorSchema = new Schema({
     ]
 }, opts)
 
-SponsorSchema.virtual('properties.popupText').get(function () {
-    return `<strong><a href="/Sponsors/${this._id}">${this.title}</a></strong>`;
-})
-
 SponsorSchema.post('findOneAndDelete', async function (doc) {
     if (doc) {
         await Review.deleteMany({

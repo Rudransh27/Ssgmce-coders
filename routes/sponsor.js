@@ -23,7 +23,6 @@ router.route('/')
       sponsor.author = req.user._id;
       await sponsor.save();
       console.log(sponsor);
-      req.flash('success', 'Successfully created a sponsor!!');
       res.redirect(`sponsors/${sponsor._id}`)
   }));
 
@@ -40,15 +39,15 @@ router.route('/:id')
           }
       }).populate('author');
       if (!sponsor) {
-          req.flash('error', 'cannot find that sponsor!');
           return res.redirect('/sponsors');
       }
       res.render('sponsors/show', { sponsor });
   }))
-    .put(isLoggedIn, isAuthor, upload.array('image'), catchAsync(sponsors.updatesponsor))
-    .delete(isLoggedIn, isAuthor, catchAsync(sponsors.deletesponsor));
-
-router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(sponsors.renderEditForm));
+    .delete(isLoggedIn, isAuthor, catchAsync(async (req, res, next) => {
+      const { id } = req.params;
+      await Campground.findByIdAndDelete(id);
+      res.redirect('/campgrounds');
+  }));
 
 module.exports = router;
 

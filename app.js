@@ -17,10 +17,6 @@ app.set('views', path.join(__dirname, '/views'))
 
 app.engine('ejs', ejsMate);
 
-app.get('/', (req, res) => {
-    res.render('home');
-})
-
 app.use('/', organizationRoutes);
 app.use('/sponsors', sponsorsRoutes);
 // app.use('/sponsors/:id/reviews', reviewRoutes);

@@ -2,13 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Organization = require('../models/Organization');
 const passport = require('passport');
-const catchAsync = require('../utils/catchAsync');
 
 
 router
   .route('/register')
   .get((req, res) => {
-    res.render('Organizations/register');
+    res.render('organizations/register');
   })
   .post(async (req, res, next) => {
     try {
