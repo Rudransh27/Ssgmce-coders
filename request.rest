@@ -1,0 +1,9 @@
+
+POST https://api.emptra.com/aadhaarVerification/requestOtp
+Content-Type : application/json
+secretKey : QDfHunfgMHlQcRvFdCduDbhq861hIp6YGjmS3cbDojUQXL2WfdPd3gBtFYqloRuTd
+clientId: 16161b5fbc72ded04c76ccadd8f2b268:32302a5e522ee59ef9bdd28d9a7eaac5
+
+{
+  "aadhaarNumber" : "922716882035"
+}
