@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Organization = require('../models/Organization');
+const Organization = require('../models/organization');
 const passport = require('passport');
 
 
@@ -11,9 +11,10 @@ router
   })
   .post(async (req, res, next) => {
     try {
-      const { email, password, OrganizationName } = req.body;
-      const Organization = new Organization({ email, OrganizationName });
-      const registerdOrganization = await Organization.register(Organization, password);
+      const { email, password, organizationName } = req.body;
+      const organization = new Organization({ email, organizationName });
+      const registerdOrganization = await Organization.register(organization, password);
+      console.log(registerdOrganization);
       req.login(registerdOrganization, (err) => {
         if (err) next(err);
         res.redirect('/sponsors');
@@ -34,7 +35,7 @@ router
     }),
     (req, res) => {
       req.flash('success', 'Welcome Back!');
-      const redirectUrl = req.session.returnTo || '/sponsors';
+      const redirectUrl = req.session.returnTo || '/campgrounds';
       delete req.session.returnTo;
       res.redirect(redirectUrl);
   }
@@ -42,7 +43,6 @@ router
 
 router.get('/logout', (req, res) => {
   req.logout();
-  req.flash('success', 'Successfully Logged Out!');
   res.redirect('/sponsors');
 });
 

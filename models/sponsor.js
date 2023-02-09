@@ -18,17 +18,16 @@ const SponsorSchema = new Schema({
     field1: String,
     field2: String,
     description: String,
-    location: String,
     author: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Organization'
     },
-    reviews: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }
-    ]
+    // reviews: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Review'
+    //     }
+    // ]
 }, opts)
 
 SponsorSchema.post('findOneAndDelete', async function (doc) {
